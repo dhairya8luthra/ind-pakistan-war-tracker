@@ -1,4 +1,4 @@
-const ENDPOINT = "http://ind-pakistan-war-tracker.onrender.com:8080/reddit";
+const ENDPOINT = "https://ind-pakistan-war-tracker.onrender.com:8080/reddit";
 
 const KEYWORDS = [
   "india",
