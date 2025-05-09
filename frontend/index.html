@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Ind-Pak Conflict Tracker | Live Dashboard</title>
+    <link rel="stylesheet" href="styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Track the latest developments in the India-Pakistan conflict with real-time updates from various sources."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div class="header-content">
+          <div class="title-group">
+            <div class="alert-icon"></div>
+            <h1>Ind-Pak Conflict Tracker</h1>
+          </div>
+
+          <div class="header-meta">
+            <div class="tags">
+              <span class="tag tag-highlight">Live thread</span>
+              <span class="tag tag-highlight">Megathreads</span>
+              <span class="tag tag-highlight">Flair posts</span>
+              <span class="tag tag-highlight">News RSS</span>
+            </div>
+
+            <div class="controls">
+              <button id="refreshBtn" class="refresh-btn">
+                <svg
+                  class="refresh-icon"
+                  viewBox="0 0 24 24"
+                  width="16"
+                  height="16"
+                >
+                  <path
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9c2.39 0 4.68.94 6.36 2.63M20 4v4h-4"
+                  ></path>
+                </svg>
+                Refresh
+              </button>
+              <span id="lastFetch" class="last-fetch"></span>
+            </div>
+          </div>
+
+          <div class="radar-container">
+            <div class="radar-line"></div>
+            <div class="radar-ping"></div>
+          </div>
+        </div>
+      </header>
+
+      <main>
+        <section id="accordion" class="accordion">
+          <!-- Content will be populated by JavaScript -->
+        </section>
+      </main>
+
+      <footer>
+        <p>Data sources: Reddit, RSS feeds | Updated in real-time</p>
+        <p>© 2025 Conflict Tracker</p>
+      </footer>
+    </div>
+
+    <!-- Templates -->
+    <template id="commentTpl">
+      <article class="comment">
+        <div class="meta">
+          <span class="author"></span>
+          <span class="separator">•</span>
+          <span class="time"></span>
+          <span class="separator">•</span>
+          <span class="score"></span>
+          <svg class="upvote-icon" viewBox="0 0 24 24" width="12" height="12">
+            <path fill="currentColor" d="M12 4l8 8h-6v8h-4v-8H4z" />
+          </svg>
+        </div>
+        <div class="body"></div>
+      </article>
+    </template>
+
+    <template id="postTpl">
+      <article class="post">
+        <a class="title" target="_blank" rel="noopener noreferrer"></a>
+        <div class="post-meta">
+          <span class="time"></span>
+          <span class="separator">•</span>
+          <span class="score"></span>
+          <svg class="upvote-icon" viewBox="0 0 24 24" width="12" height="12">
+            <path fill="currentColor" d="M12 4l8 8h-6v8h-4v-8H4z" />
+          </svg>
+          <span class="separator">•</span>
+          <span class="comments"></span>
+          <svg class="comment-icon" viewBox="0 0 24 24" width="12" height="12">
+            <path
+              fill="currentColor"
+              d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+            />
+          </svg>
+        </div>
+      </article>
+    </template>
+
+    <template id="rssTpl">
+      <article class="post rss">
+        <a class="title" target="_blank" rel="noopener noreferrer"></a>
+        <div class="post-meta">
+          <span class="time"></span>
+          <span class="separator">•</span>
+          <span class="source"></span>
+        </div>
+      </article>
+    </template>
+
+    <script src="main.js"></script>
+  </body>
+</html>
