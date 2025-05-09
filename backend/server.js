@@ -41,7 +41,12 @@ const FLAIR_NAME          = 'India/Pakistan';
 
 /* ──  EXPRESS  ─────────────────────────────────────────────── */
 const app  = express();
-app.use(cors('https://ind-pakistan-war-tracker.vercel.app/'));
+app.use(
+    cors({
+      origin: ["https://ind-pakistan-war-tracker.vercel.app", "http://localhost:3000"],
+    })
+  );
+  
 const PORT = 8080;
 
 /* helper to flatten one comment level */
@@ -73,7 +78,7 @@ async function grabFeed({ url, src }) {
 /* ──  SINGLE ENDPOINT  ─────────────────────────────────────── */
 app.get('/reddit', async (_, res) => {
   try {
-    /* 1️⃣  Reddit fetches */
+    
     const [worldSub, indiaSub, liveThread, newPosts] = await Promise.all([
       r.getSubmission(WORLDNEWS_THREAD_ID).expandReplies({ limit: Infinity, depth: 1 }),
       r.getSubmission(INDIA_THREAD_ID).expandReplies({ limit: Infinity, depth: 1 }),
@@ -81,13 +86,12 @@ app.get('/reddit', async (_, res) => {
       r.getSubreddit('worldnews').getNew({ limit: 300 }),
     ]);
 
-    /* 2️⃣  RSS fetches (done in parallel per bucket) */
     const [worldRSS, indiaRSS, pakRSS] = await Promise.all(
       Object.values(RSS_SOURCES).map(group => Promise.all(group.map(grabFeed))
                                                   .then(arr => arr.flat())
     ));
 
-    /* 3️⃣  Assemble JSON */
+  
     const payload = {
       fetched_at: Date.now(),
 
