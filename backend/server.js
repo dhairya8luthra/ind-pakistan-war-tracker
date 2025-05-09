@@ -41,7 +41,7 @@ const FLAIR_NAME          = 'India/Pakistan';
 
 /* ──  EXPRESS  ─────────────────────────────────────────────── */
 const app  = express();
-app.use(cors('*'));
+app.use(cors('https://ind-pakistan-war-tracker.vercel.app/'));
 const PORT = 8080;
 
 /* helper to flatten one comment level */
