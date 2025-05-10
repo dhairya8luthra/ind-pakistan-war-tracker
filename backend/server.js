@@ -31,6 +31,9 @@ const RSS_SOURCES = {
     { url: 'https://rss.app/feeds/CKZPQ13ewxX6qQnk.xml',                       src: 'Dawn' },
     {url: 'https://rss.app/feeds/M9SI3tNI05Y1RLTJ.xml',                        src: 'The Express Tribune' },
   ],
+  Twitter:[
+    { url: 'https://rss.app/feeds/2vX0qk1x5Y3g4J6E.xml',                       src: 'Twitter' },    
+  ]
 };
 const parser = new RSSParser({ headers: { 'User-Agent': process.env.USER_AGENT } });
 
@@ -96,7 +99,7 @@ app.get('/reddit', async (_, res) => {
       r.getSubreddit('worldnews').getNew({ limit: 300 }),
     ]);
 
-    const [worldRSS, indiaRSS, pakRSS] = await Promise.all(
+    const [worldRSS, indiaRSS, pakRSS,twitterRSS] = await Promise.all(
       Object.values(RSS_SOURCES).map(group =>
         Promise.all(group.map(grabFeed)).then(arr => arr.flat())
       )
@@ -132,9 +135,9 @@ app.get('/reddit', async (_, res) => {
         world   : worldRSS,
         india   : indiaRSS,
         pakistan: pakRSS,
+        twitter: twitterRSS,
       },
     };
-
     /* 3️⃣  Store in cache & respond */
     cachePayload = payload;
     cacheTimestamp = Date.now();
