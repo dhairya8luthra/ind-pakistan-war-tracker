@@ -28,6 +28,8 @@ const RSS_SOURCES = {
   ],
   pakistan: [
     { url: 'https://rss.app/feeds/f7iT6ESw05wtyLo0.xml',                       src: 'Geo News' },
+    { url: 'https://rss.app/feeds/CKZPQ13ewxX6qQnk.xml',                       src: 'Dawn' },
+    {url: 'https://rss.app/feeds/M9SI3tNI05Y1RLTJ.xml',                        src: 'The Express Tribune' },
   ],
 };
 const parser = new RSSParser({ headers: { 'User-Agent': process.env.USER_AGENT } });
